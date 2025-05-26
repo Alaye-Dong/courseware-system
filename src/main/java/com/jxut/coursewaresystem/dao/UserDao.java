@@ -18,4 +18,8 @@ public interface UserDao {
     User queryUserById(int id);
 
     List<User> queryAllUsers();
+
+    int countAllUsers();
+
+    List<User> queryUsersByPage(int start, int pageSize);
 }

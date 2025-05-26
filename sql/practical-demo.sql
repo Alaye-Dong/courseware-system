@@ -11,7 +11,7 @@
  Target Server Version : 80403 (8.4.3)
  File Encoding         : 65001
 
- Date: 26/05/2025 22:12:08
+ Date: 27/05/2025 00:14:30
 */
 
 SET NAMES utf8mb4;
@@ -38,6 +38,6 @@ CREATE TABLE `t_user`  (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES (1, 'zhangsan', '123456', NULL, '2', NULL, NULL, '3', NULL, '1');
+INSERT INTO `t_user` VALUES (1, 'zhangsan', '123456', '张三', '2', '江西省南昌市', '131', '3', '2000-01-01', '1');
 
 SET FOREIGN_KEY_CHECKS = 1;

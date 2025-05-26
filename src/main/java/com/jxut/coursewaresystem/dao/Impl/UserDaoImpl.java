@@ -7,6 +7,7 @@ import com.jxut.coursewaresystem.util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,4 +64,60 @@ public class UserDaoImpl implements UserDao {
     public List<User> queryAllUsers() {
         return Collections.emptyList();
     }
+
+    @Override
+    public int countAllUsers() {
+        int total = 0;
+        String sql = "SELECT COUNT(*) FROM t_user";
+
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return total;
+    }
+
+    @Override
+    public List<User> queryUsersByPage(int start, int pageSize) {
+        List<User> users = new ArrayList<>();
+
+        String sql = "SELECT * FROM t_user LIMIT ?, ?";
+
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, start);
+            pstmt.setInt(2, pageSize);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setRealname(rs.getString("realname"));
+                user.setSex(rs.getString("sex"));
+                user.setTel(rs.getString("tel"));
+                user.setType(rs.getString("type"));
+                user.setBirthday(rs.getString("birthday"));
+                user.setIf_valid(rs.getString("if_valid"));
+                // 设置其他字段...
+                users.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
+
 }

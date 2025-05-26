@@ -19,4 +19,9 @@ public interface UserService {
     User getUserById(int id);
 
     List<User> getAllUsers();
+
+
+    int countAllUsers();
+
+    List<User> getUsersByPage(int pageNum, int pageSize);
 }
