@@ -64,12 +64,26 @@
                 <tr>
                     <td>${user.username}</td>
                     <td>${user.realname}</td>
-                    <td>${user.sex}</td>
-                    <td> <!-- 年龄可能需要计算 -->
+                    <td>
+                        <c:choose>
+                            <c:when test="${user.sex == '1'}">男</c:when>
+                            <c:when test="${user.sex == '2'}">女</c:when>
+                            <c:otherwise>未知</c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td> <!-- TODO 年龄计算 -->
                         ${user.birthday}
                     </td>
                     <td>${user.tel}</td>
-                    <td>${user.type}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${user.type == '1'}">学生</c:when>
+                            <c:when test="${user.type == '2'}">老师</c:when>
+                            <c:when test="${user.type == '3'}">管理员</c:when>
+                            <c:otherwise>未知</c:otherwise>
+                        </c:choose>
+                    </td>
+
                     <td>
                         <a href="userView.html"><img src="img/read.png" alt="查看" title="查看"/></a>
                         <a href="userUpdate.html"><img src="img/xiugai.png" alt="修改" title="修改"/></a>
