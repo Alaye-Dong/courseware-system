@@ -12,7 +12,7 @@
         <h1>xxx课件管理系统</h1>
     </header>
     <section class="loginCont">
-        <form class="loginForm" action="user" method="post">
+        <form class="loginForm" action="login" method="post">
             <div class="inputbox">
                 <label for="username">用户名：</label>
                 <input id="username" type="text" name="username" placeholder="请输入用户名" required/>
