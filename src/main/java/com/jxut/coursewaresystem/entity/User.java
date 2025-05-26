@@ -10,7 +10,7 @@ public class User {
     private String tel;
     private String type;
     private String birthday;
-    private String if_vaild;
+    private String if_valid;
 
     public int getId() {
         return id;
@@ -84,11 +84,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public String getIf_vaild() {
-        return if_vaild;
+    public String getIf_valid() {
+        return if_valid;
     }
 
-    public void setIf_vaild(String if_vaild) {
-        this.if_vaild = if_vaild;
+    public void setIf_valid(String if_valid) {
+        this.if_valid = if_valid;
     }
 }
