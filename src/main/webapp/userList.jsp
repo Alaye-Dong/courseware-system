@@ -108,6 +108,14 @@
                     <c:if test="${currentPage < totalPages}">
                         <a href="?pageNum=${totalPages}">尾页</a>
                     </c:if>
+
+                    跳转到：
+                    <form action="" method="get" style="display: inline;">
+                        <input type="number" name="pageNum" min="1" max="${totalPages}" step="1"
+                               style="width: 50px;" required/>
+                        页
+                        <input type="submit" value="GO" style="width: 50px;font-size: 12px;"/>
+                    </form>
                 </td>
             </tr>
 
