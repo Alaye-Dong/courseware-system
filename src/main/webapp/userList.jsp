@@ -87,7 +87,8 @@
                     <td>
                         <a href="userView.html"><img src="img/read.png" alt="查看" title="查看"/></a>
                         <a href="userUpdate.html"><img src="img/xiugai.png" alt="修改" title="修改"/></a>
-                        <a href="#" class="removeUser" data-id="${user.id}"><img src="img/schu.png" alt="删除" title="删除"/></a>
+                        <a href="#" class="removeUser" data-id="${user.id}"><img src="img/schu.png" alt="删除"
+                                                                                 title="删除"/></a>
                     </td>
 
                 </tr>
@@ -138,7 +139,6 @@
         $('.removeUser').on('click', function (e) {
             e.preventDefault();
             userIdToDelete = $(this).data('id');
-            $('.zhezhao, .remove').show();
         });
 
         // 点击“确定”执行删除操作
@@ -146,12 +146,6 @@
             if (userIdToDelete) {
                 window.location.href = "user?action=delete&id=" + userIdToDelete;
             }
-        });
-
-        // 点击“取消”关闭弹窗
-        $('#no').on('click', function (e) {
-            e.preventDefault();
-            $('.zhezhao, .remove').hide();
         });
     });
 </script>
