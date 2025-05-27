@@ -2,6 +2,7 @@ package com.jxut.coursewaresystem.service;
 
 
 import com.jxut.coursewaresystem.entity.User;
+import com.jxut.coursewaresystem.util.PageBean;
 
 import java.util.List;
 
@@ -23,5 +24,5 @@ public interface UserService {
 
     int countAllUsers();
 
-    List<User> getUsersByPage(int pageNum, int pageSize);
+    PageBean<User> getUsersByPage(int pageNum, int pageSize);
 }

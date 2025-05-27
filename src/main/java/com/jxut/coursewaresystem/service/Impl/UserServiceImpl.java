@@ -5,6 +5,7 @@ import com.jxut.coursewaresystem.dao.Impl.UserDaoImpl;
 import com.jxut.coursewaresystem.dao.UserDao;
 import com.jxut.coursewaresystem.entity.User;
 import com.jxut.coursewaresystem.service.UserService;
+import com.jxut.coursewaresystem.util.PageBean;
 
 import java.util.List;
 
@@ -52,8 +53,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsersByPage(int pageNum, int pageSize) {
+    public PageBean<User> getUsersByPage(int pageNum, int pageSize) {
+        int totalUsers = countAllUsers();
         int start = (pageNum - 1) * pageSize;
-        return userDao.queryUsersByPage(start, pageSize);
+        List<User> users = userDao.queryUsersByPage(start, pageSize);
+        return new PageBean<>(pageNum, pageSize, totalUsers, users);
     }
 }

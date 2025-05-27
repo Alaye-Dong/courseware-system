@@ -3,6 +3,7 @@ package com.jxut.coursewaresystem.controller;
 import com.jxut.coursewaresystem.entity.User;
 import com.jxut.coursewaresystem.service.Impl.UserServiceImpl;
 import com.jxut.coursewaresystem.service.UserService;
+import com.jxut.coursewaresystem.util.PageBean;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
@@ -39,16 +39,15 @@ public class UserServlet extends HttpServlet {
                     try {
                         pageNum = Integer.parseInt(request.getParameter("pageNum"));
                     } catch (NumberFormatException ignored) {
+
                     }
 
-                    // TODO 抽离分页逻辑到 PageBean
-                    List<User> userList = userService.getUsersByPage(pageNum, pageSize);
-                    int totalUsers = userService.countAllUsers();
-                    int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+                    // 抽离分页逻辑到 PageBean
+                    PageBean<User> page = userService.getUsersByPage(pageNum, pageSize);
 
-                    request.setAttribute("userList", userList);
-                    request.setAttribute("totalPages", totalPages);
-                    request.setAttribute("currentPage", pageNum);
+                    request.setAttribute("userList", page.getItems());
+                    request.setAttribute("totalPages", page.getTotalPages());
+                    request.setAttribute("currentPage", page.getCurrentPage());
 
                     request.getRequestDispatcher("/userList.jsp").forward(request, response);
                     break;
