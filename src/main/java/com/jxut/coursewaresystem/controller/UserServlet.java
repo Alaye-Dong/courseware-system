@@ -26,6 +26,11 @@ public class UserServlet extends HttpServlet {
         try {
             switch (action != null ? action : "list") {
                 // ... 其他 case
+                case "delete":
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    userService.deleteUser(id);
+                    response.sendRedirect("user"); // 删除后刷新列表
+                    break;
 
                 case "list":
                     int pageNum = 1;
@@ -33,7 +38,8 @@ public class UserServlet extends HttpServlet {
 
                     try {
                         pageNum = Integer.parseInt(request.getParameter("pageNum"));
-                    } catch (NumberFormatException ignored) {}
+                    } catch (NumberFormatException ignored) {
+                    }
 
                     // TODO 抽离分页逻辑到 PageBean
                     List<User> userList = userService.getUsersByPage(pageNum, pageSize);

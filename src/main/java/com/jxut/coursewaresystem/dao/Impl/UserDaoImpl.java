@@ -17,8 +17,7 @@ public class UserDaoImpl implements UserDao {
         boolean result = false;
 
         String sql = "SELECT COUNT(*) FROM t_user WHERE username = ? AND password = ?";
-        try (Connection conn = DbUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DbUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
             pstmt.setString(2, password);
@@ -42,7 +41,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteUser(int id) {
+        String sql = "DELETE FROM t_user WHERE id = ?";
+        try (Connection conn = DbUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            pstmt.setString(1, String.valueOf(id));
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -70,9 +77,7 @@ public class UserDaoImpl implements UserDao {
         int total = 0;
         String sql = "SELECT COUNT(*) FROM t_user";
 
-        try (Connection conn = DbUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+        try (Connection conn = DbUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
 
             if (rs.next()) {
                 total = rs.getInt(1);
@@ -91,8 +96,7 @@ public class UserDaoImpl implements UserDao {
 
         String sql = "SELECT * FROM t_user LIMIT ?, ?";
 
-        try (Connection conn = DbUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DbUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, start);
             pstmt.setInt(2, pageSize);

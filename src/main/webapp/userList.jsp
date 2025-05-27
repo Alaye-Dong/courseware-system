@@ -72,7 +72,7 @@
                         </c:choose>
                     </td>
                     <td> <!-- TODO 年龄计算 -->
-                        ${user.birthday}
+                            ${user.birthday}
                     </td>
                     <td>${user.tel}</td>
                     <td>
@@ -87,8 +87,9 @@
                     <td>
                         <a href="userView.html"><img src="img/read.png" alt="查看" title="查看"/></a>
                         <a href="userUpdate.html"><img src="img/xiugai.png" alt="修改" title="修改"/></a>
-                        <a href="#" class="removeUser"><img src="img/schu.png" alt="删除" title="删除"/></a>
+                        <a href="#" class="removeUser" data-id="${user.id}"><img src="img/schu.png" alt="删除" title="删除"/></a>
                     </td>
+
                 </tr>
             </c:forEach>
             <tr>
@@ -129,6 +130,31 @@
 <script src="js/jquery.js"></script>
 <script src="js/js.js"></script>
 <script src="js/time.js"></script>
+<script>
+    $(function () {
+        let userIdToDelete = null;
+
+        // 点击“删除”按钮设置用户ID并显示弹窗
+        $('.removeUser').on('click', function (e) {
+            e.preventDefault();
+            userIdToDelete = $(this).data('id');
+            $('.zhezhao, .remove').show();
+        });
+
+        // 点击“确定”执行删除操作
+        $('#yes').on('click', function () {
+            if (userIdToDelete) {
+                window.location.href = "user?action=delete&id=" + userIdToDelete;
+            }
+        });
+
+        // 点击“取消”关闭弹窗
+        $('#no').on('click', function (e) {
+            e.preventDefault();
+            $('.zhezhao, .remove').hide();
+        });
+    });
+</script>
 
 </body>
 </html>
