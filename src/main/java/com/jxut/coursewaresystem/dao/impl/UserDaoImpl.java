@@ -70,7 +70,21 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
+        String sql = "UPDATE t_user SET realname = ?, sex = ?, address = ?, tel = ?, type = ?, birthday = ? WHERE id = ?";
+        try (Connection conn = DbUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getRealname());
+            pstmt.setString(2, user.getSex());
+            pstmt.setString(3, user.getAddress());
+            pstmt.setString(4, user.getTel());
+            pstmt.setString(5, user.getType());
+            pstmt.setString(6, user.getBirthday());
+            pstmt.setInt(7, user.getId());
 
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

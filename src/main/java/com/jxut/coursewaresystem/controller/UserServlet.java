@@ -31,6 +31,10 @@ public class UserServlet extends HttpServlet {
                     toAdd(request, response);
                     break;
 
+                case "toUpdate":
+                    toUpdate(request, response);
+                    break;
+
                 case "queryByRealname":
                     queryByRealname(request, response);
                     break;
@@ -59,6 +63,13 @@ public class UserServlet extends HttpServlet {
 
     private void toAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/userAdd.jsp").forward(request, response);
+    }
+
+    private void toUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        User user = userService.getUserById(id);
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("/userUpdate.jsp").forward(request, response);
     }
 
     private void queryByRealname(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -105,6 +116,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8"); // 防止Post中文乱码
         String action = request.getParameter("action");
 
         try {
@@ -118,6 +130,10 @@ public class UserServlet extends HttpServlet {
                     add(request, response);
                     break;
 
+                case "update":
+                    update(request, response);
+                    break;
+
                 case "list":
                     list(request, response);
                     break;
@@ -129,6 +145,34 @@ public class UserServlet extends HttpServlet {
             }
         } catch (Exception e) {
             throw new ServletException(e);
+        }
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            String idStr = request.getParameter("id");
+            if (idStr == null || idStr.trim().isEmpty()) {
+                throw new ServletException("用户ID不能为空");
+            }
+
+            User user = new User();
+            user.setId(Integer.parseInt(idStr)); // 确保id不为空
+            user.setRealname(request.getParameter("realname"));
+            user.setSex(request.getParameter("sex"));
+            user.setBirthday(request.getParameter("birthday"));
+            user.setTel(request.getParameter("tel"));
+            user.setAddress(request.getParameter("address"));
+            user.setType(request.getParameter("type"));
+
+            boolean success = userService.updateUser(user);
+            if (success) {
+                response.sendRedirect("user?action=list");
+            } else {
+                request.setAttribute("error", "更新用户失败");
+                request.getRequestDispatcher("/userUpdate.jsp?id=" + user.getId()).forward(request, response);
+            }
+        } catch (NumberFormatException e) {
+            throw new ServletException("用户ID必须是数字", e);
         }
     }
 
