@@ -35,6 +35,7 @@ public class UserServlet extends HttpServlet {
                         pageNum = Integer.parseInt(request.getParameter("pageNum"));
                     } catch (NumberFormatException ignored) {}
 
+                    // TODO 抽离分页逻辑到 PageBean
                     List<User> userList = userService.getUsersByPage(pageNum, pageSize);
                     int totalUsers = userService.countAllUsers();
                     int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
