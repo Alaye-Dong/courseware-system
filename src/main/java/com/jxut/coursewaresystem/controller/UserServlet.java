@@ -31,29 +31,11 @@ public class UserServlet extends HttpServlet {
                     break;
 
                 case "delete":
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    userService.deleteUser(id);
-                    response.sendRedirect("user"); // 删除后刷新列表
+                    delete(request, response);
                     break;
 
                 case "list":
-                    int pageNum = 1;
-                    int pageSize = 6; // 每页显示的记录数
-
-                    try {
-                        pageNum = Integer.parseInt(request.getParameter("pageNum"));
-                    } catch (NumberFormatException ignored) {
-
-                    }
-
-                    // 抽离分页逻辑到 PageBean
-                    PageBean<User> page = userService.getUsersByPage(pageNum, pageSize);
-
-                    request.setAttribute("userList", page.getItems());
-                    request.setAttribute("totalPages", page.getTotalPages());
-                    request.setAttribute("currentPage", page.getCurrentPage());
-
-                    request.getRequestDispatcher("/userList.jsp").forward(request, response);
+                    list(request, response);
                     break;
 
                 default:
@@ -66,15 +48,41 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.getUserById(id);
         request.setAttribute("user", user);
         request.getRequestDispatcher("/userView.jsp").forward(request, response);
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        userService.deleteUser(id);
+        response.sendRedirect("user"); // 删除后刷新列表
+    }
+
+    private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int pageNum = 1;
+        int pageSize = 6; // 每页显示的记录数
+
+        try {
+            pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        } catch (NumberFormatException ignored) {
+
+        }
+
+        // 抽离分页逻辑到 PageBean
+        PageBean<User> page = userService.getUsersByPage(pageNum, pageSize);
+
+        request.setAttribute("userList", page.getItems());
+        request.setAttribute("totalPages", page.getTotalPages());
+        request.setAttribute("currentPage", page.getCurrentPage());
+
+        request.getRequestDispatcher("/userList.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }
