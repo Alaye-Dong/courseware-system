@@ -26,6 +26,10 @@ public class UserServlet extends HttpServlet {
         try {
             switch (action != null ? action : "list") {
                 // ... 其他 case
+                case "view":
+                    view(request, response);
+                    break;
+
                 case "delete":
                     int id = Integer.parseInt(request.getParameter("id"));
                     userService.deleteUser(id);
@@ -65,5 +69,12 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        User user = userService.getUserById(id);
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("/userView.jsp").forward(request, response);
     }
 }

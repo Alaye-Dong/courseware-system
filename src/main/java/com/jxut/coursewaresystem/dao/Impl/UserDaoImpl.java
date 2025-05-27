@@ -7,6 +7,7 @@ import com.jxut.coursewaresystem.util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +65,30 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User queryUserById(int id) {
-        return null;
+        User user = new User();
+
+        String sql = "SELECT * FROM t_user WHERE id = ?";
+
+        try (Connection conn = DbUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setRealname(rs.getString("realname"));
+                user.setSex(rs.getString("sex"));
+                user.setAddress(rs.getString("address"));
+                user.setTel(rs.getString("tel"));
+                user.setType(rs.getString("type"));
+                user.setBirthday(rs.getString("birthday"));
+                user.setIf_valid(rs.getString("if_valid"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return user;
     }
 
     @Override
@@ -109,6 +133,7 @@ public class UserDaoImpl implements UserDao {
                 user.setUsername(rs.getString("username"));
                 user.setRealname(rs.getString("realname"));
                 user.setSex(rs.getString("sex"));
+                user.setAddress(rs.getString("address"));
                 user.setTel(rs.getString("tel"));
                 user.setType(rs.getString("type"));
                 user.setBirthday(rs.getString("birthday"));
