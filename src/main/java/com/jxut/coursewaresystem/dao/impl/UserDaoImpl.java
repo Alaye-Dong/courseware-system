@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao {
     public boolean checkUser(String username, String password) {
         boolean result = false;
 
-        String sql = "SELECT COUNT(*) FROM t_user WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM t_user WHERE username = ? AND password = ?";
         try (Connection conn = DbUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
