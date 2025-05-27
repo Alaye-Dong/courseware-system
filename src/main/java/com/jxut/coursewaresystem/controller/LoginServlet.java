@@ -1,6 +1,6 @@
 package com.jxut.coursewaresystem.controller;
 
-import com.jxut.coursewaresystem.service.Impl.UserServiceImpl;
+import com.jxut.coursewaresystem.service.impl.UserServiceImpl;
 import com.jxut.coursewaresystem.service.UserService;
 
 import javax.servlet.ServletException;

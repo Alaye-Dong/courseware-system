@@ -1,7 +1,7 @@
-package com.jxut.coursewaresystem.service.Impl;
+package com.jxut.coursewaresystem.service.impl;
 
 
-import com.jxut.coursewaresystem.dao.Impl.UserDaoImpl;
+import com.jxut.coursewaresystem.dao.impl.UserDaoImpl;
 import com.jxut.coursewaresystem.dao.UserDao;
 import com.jxut.coursewaresystem.entity.User;
 import com.jxut.coursewaresystem.service.UserService;

@@ -1,7 +1,7 @@
 package com.jxut.coursewaresystem.controller;
 
 import com.jxut.coursewaresystem.entity.User;
-import com.jxut.coursewaresystem.service.Impl.UserServiceImpl;
+import com.jxut.coursewaresystem.service.impl.UserServiceImpl;
 import com.jxut.coursewaresystem.service.UserService;
 import com.jxut.coursewaresystem.util.PageBean;
 

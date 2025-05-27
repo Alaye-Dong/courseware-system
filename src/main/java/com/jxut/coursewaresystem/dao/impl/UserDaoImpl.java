@@ -1,4 +1,4 @@
-package com.jxut.coursewaresystem.dao.Impl;
+package com.jxut.coursewaresystem.dao.impl;
 
 import com.jxut.coursewaresystem.dao.UserDao;
 import com.jxut.coursewaresystem.entity.User;
