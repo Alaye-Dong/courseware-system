@@ -45,9 +45,11 @@
             <span>用户管理页面 >> 用户添加页面</span>
         </div>
         <div class="providerAdd">
+            <%-- TODO 设置必填属性 --%>
             <form action="user" method="post">
                 <!--div的class 为error是验证错误，ok是验证成功-->
                 <input type="hidden" name="action" value="add">
+                <%-- TODO 重复账号校验 --%>
                 <div>
                     <label for="userId">用户账号：</label>
                     <input type="text" name="username" id="userId"/>
@@ -96,10 +98,9 @@
                 </div>
                 <div>
                     <label>用户类别：</label>
-                    <input type="radio" name="type" value="0"/>学员
-                    <input type="radio" name="type" value="1"/>老师
-                    <input type="radio" name="type" value="2"/>管理员
-
+                    <input type="radio" name="type" value="1"/>学员
+                    <input type="radio" name="type" value="2"/>老师
+                    <input type="radio" name="type" value="3"/>管理员
                 </div>
                 <div class="providerAddBtn">
                     <!--<a href="#">保存</a>-->
