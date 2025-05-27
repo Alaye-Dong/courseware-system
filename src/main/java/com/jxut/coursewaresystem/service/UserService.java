@@ -24,7 +24,6 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-
     int countAllUsers();
 
     PageBean<User> getUsersByPage(int pageNum, int pageSize);

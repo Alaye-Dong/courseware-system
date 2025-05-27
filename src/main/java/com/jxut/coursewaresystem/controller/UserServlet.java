@@ -114,7 +114,6 @@ public class UserServlet extends HttpServlet {
                     login(request, response);
                     break;
 
-
                 case "add":
                     add(request, response);
                     break;

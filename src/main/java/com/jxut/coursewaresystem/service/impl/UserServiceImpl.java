@@ -7,7 +7,6 @@ import com.jxut.coursewaresystem.entity.User;
 import com.jxut.coursewaresystem.service.UserService;
 import com.jxut.coursewaresystem.util.PageBean;
 
-import java.util.Collections;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {

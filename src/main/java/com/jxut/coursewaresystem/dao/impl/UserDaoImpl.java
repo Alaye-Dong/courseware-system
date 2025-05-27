@@ -39,6 +39,7 @@ public class UserDaoImpl implements UserDao {
     public void addUser(User user) {
         String sql = "INSERT INTO t_user(username, password, realname, sex, address, tel, type, birthday) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DbUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // TODO 更优雅的获取字段方式，避免index硬编码匹配
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getRealname());
