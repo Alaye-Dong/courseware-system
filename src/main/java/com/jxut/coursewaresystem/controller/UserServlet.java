@@ -48,6 +48,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+    // TODO 调整合适的作用域
     void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.getUserById(id);

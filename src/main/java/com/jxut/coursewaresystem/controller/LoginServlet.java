@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
 
     }
 
+    //  TODO 重构到UserServlet的doPost方法中
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
