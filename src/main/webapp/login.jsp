@@ -22,10 +22,9 @@
                 <input id="password" type="password" name="password" placeholder="请输入密码" required/>
             </div>
             <div class="subBtn">
-                <input type="submit" value="登录" />
+                <input type="submit" value="登录"/>
                 <input type="reset" value="重置"/>
             </div>
-
         </form>
     </section>
 </section>

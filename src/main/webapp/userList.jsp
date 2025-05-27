@@ -51,7 +51,7 @@
                 <input type="text" name="realname" value="<c:out value="${param.realname}" default=""/>">
                 <button type="submit">查询</button>
             </form>
-            <a href="userAdd.html">添加用户</a>
+            <a href="${pageContext.request.contextPath}/user?action=toAdd">添加用户</a>
         </div>
         <!--用户-->
         <table class="providerTable" cellpadding="0" cellspacing="0">

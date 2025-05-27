@@ -27,6 +27,10 @@ public class UserServlet extends HttpServlet {
         try {
             switch (action != null ? action : "list") {
                 // ... 其他 case
+                case "toAdd":
+                    toAdd(request, response);
+                    break;
+
                 case "queryByRealname":
                     queryByRealname(request, response);
                     break;
@@ -51,6 +55,10 @@ public class UserServlet extends HttpServlet {
         } catch (Exception e) {
             throw new ServletException(e);
         }
+    }
+
+    private void toAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/userAdd.jsp").forward(request, response);
     }
 
     private void queryByRealname(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -97,6 +105,6 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("doPost");
     }
 }
