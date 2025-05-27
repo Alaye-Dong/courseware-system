@@ -44,9 +44,11 @@
         </div>
         <div class="search">
             <span>用户名：</span>
+            <%--    TODO 查询框和按钮的样式  --%>
+            <%--    TODO 查询状态下的分页功能 --%>
             <form action="${pageContext.request.contextPath}/user" method="get">
                 <input type="hidden" name="action" value="queryByRealname">
-                <input type="text" name="realname">
+                <input type="text" name="realname" value="<c:out value="${param.realname}" default=""/>">
                 <button type="submit">查询</button>
             </form>
             <a href="userAdd.html">添加用户</a>
@@ -88,7 +90,8 @@
                     </td>
 
                     <td>
-                        <a href="${pageContext.request.contextPath}/user?action=view&id=${user.id}"><img src="img/read.png" alt="查看" title="查看"/></a>
+                        <a href="${pageContext.request.contextPath}/user?action=view&id=${user.id}"><img
+                                src="img/read.png" alt="查看" title="查看"/></a>
                         <a href="userUpdate.html"><img src="img/xiugai.png" alt="修改" title="修改"/></a>
                         <a href="#" class="removeUser" data-id="${user.id}"><img src="img/schu.png" alt="删除"
                                                                                  title="删除"/></a>
