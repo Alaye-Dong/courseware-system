@@ -37,7 +37,21 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
+        String sql = "INSERT INTO t_user(username, password, realname, sex, address, tel, type, birthday) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = DbUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getRealname());
+            pstmt.setString(4, user.getSex());
+            pstmt.setString(5, user.getAddress());
+            pstmt.setString(6, user.getTel());
+            pstmt.setString(7, user.getType());
+            pstmt.setString(8, user.getBirthday());
 
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

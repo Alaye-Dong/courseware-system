@@ -105,6 +105,42 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("doPost");
+        String action = request.getParameter("action");
+
+        try {
+            switch (action != null ? action : "list") {
+                // ... 其他 case
+                case "add":
+                    add(request, response);
+                    break;
+
+                case "list":
+                    list(request, response);
+                    break;
+
+                default:
+                    // 默认情况下列出所有用户
+                    request.getRequestDispatcher("/userList.jsp").forward(request, response);
+                    break;
+            }
+        } catch (Exception e) {
+            throw new ServletException(e);
+        }
+    }
+
+    private void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String username = request.getParameter("username");
+        String realname = request.getParameter("realname");
+        String password = request.getParameter("password");
+        String birthday = request.getParameter("birthday");
+        String sex = request.getParameter("sex");
+        String address = request.getParameter("address");
+        String tel = request.getParameter("tel");
+        String type = request.getParameter("type");
+
+        User user = new User(username, realname, password, birthday, sex, address, tel, type);
+
+        userService.addUser(user);
+        response.sendRedirect("user"); // 添加后刷新列表
     }
 }

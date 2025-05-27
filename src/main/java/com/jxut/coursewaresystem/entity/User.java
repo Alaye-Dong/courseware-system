@@ -12,6 +12,20 @@ public class User {
     private String birthday;
     private String if_valid;
 
+    public User() {
+    }
+
+    public User(String username, String realname, String password, String birthday, String sex, String address, String tel, String type) {
+        this.username = username;
+        this.realname = realname;
+        this.password = password;
+        this.birthday = birthday;
+        this.sex = sex;
+        this.address = address;
+        this.tel = tel;
+        this.type = type;
+    }
+
     public int getId() {
         return id;
     }

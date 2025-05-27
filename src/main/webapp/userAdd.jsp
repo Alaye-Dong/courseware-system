@@ -50,7 +50,7 @@
                 <input type="hidden" name="action" value="add">
                 <div>
                     <label for="userId">用户账号：</label>
-                    <input type="text" name="id" id="userId"/>
+                    <input type="text" name="username" id="userId"/>
                     <span>*请输入用户账号，且不能重复</span>
                 </div>
                 <div>
