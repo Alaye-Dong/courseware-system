@@ -110,6 +110,11 @@ public class UserServlet extends HttpServlet {
         try {
             switch (action != null ? action : "list") {
                 // ... 其他 case
+                case "login":
+                    login(request, response);
+                    break;
+
+
                 case "add":
                     add(request, response);
                     break;
@@ -125,6 +130,21 @@ public class UserServlet extends HttpServlet {
             }
         } catch (Exception e) {
             throw new ServletException(e);
+        }
+    }
+
+    private void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        boolean loginSuccess = userService.login(username, password);
+
+        if (loginSuccess) {
+            // 登录成功，跳转index.jsp
+            response.sendRedirect("index.jsp");
+        } else {
+            request.setAttribute("error", "用户名或密码错误");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 

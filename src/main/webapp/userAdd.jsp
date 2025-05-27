@@ -64,6 +64,7 @@
                     <span>*密码长度必须大于6位小于20位</span>
 
                 </div>
+                <%-- TODO 确认密码校验 --%>
                 <div>
                     <label for="userRemi">确认密码：</label>
                     <input type="text" name="userRemi" id="userRemi"/>

@@ -12,7 +12,8 @@
         <h1>xxx课件管理系统</h1>
     </header>
     <section class="loginCont">
-        <form class="loginForm" action="login" method="post">
+        <form class="loginForm" action="user" method="post">
+            <input type="hidden" name="action" value="login">
             <div class="inputbox">
                 <label for="username">用户名：</label>
                 <input id="username" type="text" name="username" placeholder="请输入用户名" required/>
@@ -21,6 +22,7 @@
                 <label for="password">密码：</label>
                 <input id="password" type="password" name="password" placeholder="请输入密码" required/>
             </div>
+
             <div class="subBtn">
                 <input type="submit" value="登录"/>
                 <input type="reset" value="重置"/>
