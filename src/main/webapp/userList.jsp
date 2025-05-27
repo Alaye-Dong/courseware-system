@@ -96,14 +96,18 @@
             <tr>
                 <td colspan="7">
                     当前第${currentPage}页，共${totalPages}页
-                    <a href="?pageNum=1">首页</a>
+                    <c:if test="${currentPage > 1}">
+                        <a href="?pageNum=1">首页</a>
+                    </c:if>
                     <c:if test="${currentPage > 1}">
                         <a href="?pageNum=${currentPage - 1}">上一页</a>
                     </c:if>
                     <c:if test="${currentPage < totalPages}">
                         <a href="?pageNum=${currentPage + 1}">下一页</a>
                     </c:if>
-                    <a href="?pageNum=${totalPages}">尾页</a>
+                    <c:if test="${currentPage < totalPages}">
+                        <a href="?pageNum=${totalPages}">尾页</a>
+                    </c:if>
                 </td>
             </tr>
 
