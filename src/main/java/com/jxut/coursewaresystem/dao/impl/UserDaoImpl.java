@@ -89,11 +89,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User queryUserByName(String username) {
-        return null;
-    }
-
-    @Override
     public User queryUserById(int id) {
         User user = new User();
 
@@ -152,11 +147,6 @@ public class UserDaoImpl implements UserDao {
         user.setBirthday(rs.getString("birthday"));
         user.setIf_valid(rs.getString("if_valid"));
         return user;
-    }
-
-    @Override
-    public List<User> queryAllUsers() {
-        return Collections.emptyList();
     }
 
     @Override

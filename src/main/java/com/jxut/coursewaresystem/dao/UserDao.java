@@ -13,13 +13,9 @@ public interface UserDao {
 
     boolean updateUser(User user);
 
-    User queryUserByName(String username);
-
     User queryUserById(int id);
 
     List<User> queryUsersByRealname(String realname);
-
-    List<User> queryAllUsers();
 
     int countAllUsers();
 

@@ -33,11 +33,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByName(String username) {
-        return userDao.queryUserByName(username);
-    }
-
-    @Override
     public User getUserById(int id) {
         return userDao.queryUserById(id);
     }
@@ -45,11 +40,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsersByRealname(String realname) {
         return userDao.queryUsersByRealname(realname);
-    }
-
-    @Override
-    public List<User> getAllUsers() {
-        return userDao.queryAllUsers();
     }
 
     @Override
