@@ -17,6 +17,8 @@ public interface UserDao {
 
     User queryUserById(int id);
 
+    List<User> queryUsersByRealname(String realname);
+
     List<User> queryAllUsers();
 
     int countAllUsers();

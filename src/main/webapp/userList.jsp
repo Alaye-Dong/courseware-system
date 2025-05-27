@@ -44,8 +44,11 @@
         </div>
         <div class="search">
             <span>用户名：</span>
-            <input type="text" placeholder="请输入用户名"/>
-            <input type="button" value="查询"/>
+            <form action="${pageContext.request.contextPath}/user" method="get">
+                <input type="hidden" name="action" value="queryByRealname">
+                <input type="text" name="realname">
+                <button type="submit">查询</button>
+            </form>
             <a href="userAdd.html">添加用户</a>
         </div>
         <!--用户-->

@@ -19,6 +19,9 @@ public interface UserService {
 
     User getUserById(int id);
 
+    // 添加根据真实姓名进行模糊查询的方法
+    List<User> getUsersByRealname(String realname);
+
     List<User> getAllUsers();
 
 

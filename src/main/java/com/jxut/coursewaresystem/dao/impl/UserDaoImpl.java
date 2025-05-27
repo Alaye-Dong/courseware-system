@@ -92,6 +92,39 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<User> queryUsersByRealname(String realname) {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM t_user WHERE realname LIKE ?";
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "%" + realname + "%");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                users.add(extractUserFromResultSet(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    // 新增的 extractUserFromResultSet 方法
+    private User extractUserFromResultSet(ResultSet rs) throws SQLException {
+        User user = new User();
+        user.setId(rs.getInt("id"));
+        user.setUsername(rs.getString("username"));
+        user.setPassword(rs.getString("password"));
+        user.setRealname(rs.getString("realname"));
+        user.setSex(rs.getString("sex"));
+        user.setAddress(rs.getString("address"));
+        user.setTel(rs.getString("tel"));
+        user.setType(rs.getString("type"));
+        user.setBirthday(rs.getString("birthday"));
+        user.setIf_valid(rs.getString("if_valid"));
+        return user;
+    }
+
+    @Override
     public List<User> queryAllUsers() {
         return Collections.emptyList();
     }
@@ -128,18 +161,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setRealname(rs.getString("realname"));
-                user.setSex(rs.getString("sex"));
-                user.setAddress(rs.getString("address"));
-                user.setTel(rs.getString("tel"));
-                user.setType(rs.getString("type"));
-                user.setBirthday(rs.getString("birthday"));
-                user.setIf_valid(rs.getString("if_valid"));
-                // 设置其他字段...
-                users.add(user);
+                users.add(extractUserFromResultSet(rs));
             }
 
         } catch (Exception e) {

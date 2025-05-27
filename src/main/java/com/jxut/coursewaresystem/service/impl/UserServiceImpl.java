@@ -7,6 +7,7 @@ import com.jxut.coursewaresystem.entity.User;
 import com.jxut.coursewaresystem.service.UserService;
 import com.jxut.coursewaresystem.util.PageBean;
 
+import java.util.Collections;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -40,6 +41,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(int id) {
         return userDao.queryUserById(id);
+    }
+
+    @Override
+    public List<User> getUsersByRealname(String realname) {
+        return userDao.queryUsersByRealname(realname);
     }
 
     @Override

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
@@ -26,6 +27,10 @@ public class UserServlet extends HttpServlet {
         try {
             switch (action != null ? action : "list") {
                 // ... 其他 case
+                case "queryByRealname":
+                    queryByRealname(request, response);
+                    break;
+
                 case "view":
                     view(request, response);
                     break;
@@ -48,8 +53,16 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    // TODO 调整合适的作用域
-    void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void queryByRealname(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String realname = request.getParameter("realname");
+        List<User> users = userService.getUsersByRealname(realname);
+
+        request.setAttribute("userList", users);
+        request.setAttribute("realname", realname);  // 将搜索关键词传回页面
+        request.getRequestDispatcher("/userList.jsp").forward(request, response);
+    }
+
+    private void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.getUserById(id);
         request.setAttribute("user", user);
